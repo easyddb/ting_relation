@@ -204,6 +204,7 @@ function ting_relation_get_abstract($relation) {
 function ting_relation_get_online_url($relation) {
   $url = FALSE;
   $title = '';
+  $external = 'target="_blank"';
   switch ($relation->type) {
     case 'dbcaddi:hasReview':
     case 'dbcaddi:hasSubjectDescription':
@@ -213,6 +214,7 @@ function ting_relation_get_online_url($relation) {
       if (in_array(strtolower($relation->object->getAc_source()), $reservable_sources)) {
         $title = t('Read more about the material');
         $url = '/ting/object/' . $relation->object->id;
+        $external = '';
       }
       else {
         $title = t('Read more at %source', array('%source' => $relation->object->getAc_source()));
@@ -252,6 +254,7 @@ function ting_relation_get_online_url($relation) {
     return array(
       'url' => $url,
       'title' => $title,
+      'external' => $external,
     );
   }
 
